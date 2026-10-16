@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>वैदिक कुण्डली - Free Kundali Generator</title>
+
+    <!-- Open Graph / WhatsApp / Facebook Preview Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://saraswat-media.github.io/Free-kundali/">
+    <meta property="og:title" content="🕉️ वैदिक जन्म कुण्डली - मुफ़्त ऑनलाइन पत्रिका">
+    <meta property="og:description" content="सटीक वैदिक गणना, लग्न व नवमांश (D9) चक्र, विंशोत्तरी दशा, मांगलिक दोष और साढ़े साती विश्लेषण। तुरंत मुफ़्त PDF डाउनलोड करें।">
+    <meta property="og:image" content="https://saraswat-media.github.io/Free-kundali/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🕉️ वैदिक जन्म कुण्डली - मुफ़्त ऑनलाइन पत्रिका">
+    <meta name="twitter:description" content="सटीक वैदिक ज्योतिष गणना, नवमांश और विंशोत्तरी दशा फल।">
+    <meta name="twitter:image" content="https://saraswat-media.github.io/Free-kundali/og-image.png">
+
+    <!-- CSS & Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="bg-amber-50/30 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- हेडर -->
+    <header class="bg-amber-700 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold flex items-center gap-2">
+                🕉️ <span id="site-title">वैदिक जन्म कुण्डली</span>
+            </h1>
+            
+            <div class="flex items-center gap-3">
+                <a id="top-cashkaro-link" href="#" target="_blank" class="hidden sm:inline-block bg-yellow-400 hover:bg-yellow-300 text-gray-900 px-3 py-1 rounded-full text-xs font-bold transition">
+                    💰 CashKaro कैशबैक
+                </a>
+                <button id="lang-toggle-btn" class="border border-white/70 px-3 py-1 rounded text-sm hover:bg-amber-800 transition">
+                    English
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- मुख्य बॉडी -->
+    <main class="max-w-4xl mx-auto p-4 sm:p-6 w-full flex-grow">
+        <!-- कुण्डली इनपुट फॉर्म -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg border border-amber-200 mb-8">
+            <h2 id="form-heading" class="text-2xl font-bold text-amber-900 text-center mb-1">मुफ़्त जन्म कुण्डली बनाएं</h2>
+            <p id="form-sub" class="text-gray-500 text-center text-sm mb-6">सटीक वैदिक ज्योतिष गणना, दोष विश्लेषण, नवमांश और विंशोत्तरी दशा</p>
+
+            <form id="kundali-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label id="lbl-name" class="block text-sm font-semibold mb-1">पूरा नाम</label>
+                    <input type="text" id="user-name" required placeholder="उदा. रमेश कुमार" class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div>
+                    <label id="lbl-gender" class="block text-sm font-semibold mb-1">लिंग</label>
+                    <select id="user-gender" class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                        <option value="male" id="opt-male">पुरुष</option>
+                        <option value="female" id="opt-female">महिला</option>
+                    </select>
+                </div>
+                <div>
+                    <label id="lbl-dob" class="block text-sm font-semibold mb-1">जन्म तिथि</label>
+                    <input type="date" id="user-dob" required class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div>
+                    <label id="lbl-tob" class="block text-sm font-semibold mb-1">जन्म समय</label>
+                    <input type="time" id="user-tob" required class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div class="sm:col-span-2">
+                    <label id="lbl-city" class="block text-sm font-semibold mb-1">जन्म स्थान (शहर)</label>
+                    <input type="text" id="user-city" required placeholder="उदा. नोखा, बीकानेर, जयपुर" class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div class="sm:col-span-2 mt-2">
+                    <button type="submit" id="btn-submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 rounded-lg shadow transition text-lg">
+                        ✨ फ्री कुण्डली जनरेट करें
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- परिणाम सेक्शन -->
+        <div id="results-section" class="hidden space-y-6">
+            
+            <div id="pdf-printable-area" class="bg-white p-6 rounded-2xl shadow-lg border border-amber-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 mb-4 gap-2">
+                    <div>
+                        <h3 id="res-user-name" class="text-2xl font-bold text-gray-900"></h3>
+                        <p id="res-birth-info" class="text-sm text-gray-500"></p>
+                    </div>
+                    <button id="download-pdf-btn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-1 shadow">
+                        📥 PDF डाउनलोड करें
+                    </button>
+                </div>
+
+                <!-- टैब्स (D1, D9, Dasha, Dosha) -->
+                <div class="flex border-b border-gray-200 mb-6 overflow-x-auto">
+                    <button class="tab-btn px-4 py-2 font-bold text-amber-700 border-b-2 border-amber-700 outline-none" data-target="tab-view-d1" id="tab-btn-d1">लग्न (D1)</button>
+                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="tab-view-d9" id="tab-btn-d9">नवमांश (D9)</button>
+                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="tab-view-dasha" id="tab-btn-dasha">विंशोत्तरी दशा</button>
+                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="tab-view-dosha" id="tab-btn-dosha">दोष व विश्लेषण</button>
+                </div>
+
+                <!-- टैब 1: लग्न कुण्डली -->
+                <div id="tab-view-d1" class="tab-content block">
+                    <h4 class="text-center font-bold text-lg text-amber-900 mb-3">लग्न कुण्डली (D-1 Chart)</h4>
+                    <div id="d1-chart-container"></div>
+                </div>
+
+                <!-- टैब 2: नवमांश कुण्डली -->
+                <div id="tab-view-d9" class="tab-content hidden">
+                    <h4 class="text-center font-bold text-lg text-amber-900 mb-3">नवमांश कुण्डली (D-9 Chart)</h4>
+                    <div id="d9-chart-container"></div>
+                </div>
+
+                <!-- टैब 3: विंशोत्तरी दशा -->
+                <div id="tab-view-dasha" class="tab-content hidden">
+                    <h4 class="text-center font-bold text-lg text-amber-900 mb-3">विंशोत्तरी दशा विवरण</h4>
+                    <div id="dasha-content" class="space-y-3 p-4 bg-amber-50/50 rounded-xl"></div>
+                </div>
+
+                <!-- टैब 4: दोष एवं उपाय -->
+                <div id="tab-view-dosha" class="tab-content hidden">
+                    <h4 class="text-center font-bold text-lg text-amber-900 mb-4">दोष एवं ग्रह प्रभाव</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl border bg-orange-50 border-orange-200">
+                            <h5 id="manglik-header" class="font-bold text-orange-900">मंगल दोष स्थिति</h5>
+                            <p id="manglik-status" class="text-sm mt-1"></p>
+                        </div>
+                        <div class="p-4 rounded-xl border bg-blue-50 border-blue-200">
+                            <h5 id="sadesati-header" class="font-bold text-blue-900">शनि साढ़े साती स्थिति</h5>
+                            <p id="sadesati-status" class="text-sm mt-1"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amazon Affiliate उपाय बॉक्स -->
+            <div class="bg-gradient-to-r from-amber-600 to-amber-700 text-white p-6 rounded-2xl shadow-lg">
+                <h4 id="aff-box-title" class="text-lg font-bold mb-2">💎 ग्रह शांति, पूजा एवं रत्न उपाय</h4>
+                <p id="aff-box-desc" class="text-sm text-amber-100 mb-4">अपनी कुंडली के अनुसार प्रमाणित रत्न, मूल रुद्राक्ष और पूजा सामग्री Amazon से प्राप्त करें:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <a id="aff-rudraksha" href="#" target="_blank" class="bg-white text-gray-900 p-3 rounded-lg text-center font-semibold text-sm hover:bg-amber-50 shadow">
+                        📿 प्राकृतिक रुद्राक्ष
+                    </a>
+                    <a id="aff-gemstones" href="#" target="_blank" class="bg-white text-gray-900 p-3 rounded-lg text-center font-semibold text-sm hover:bg-amber-50 shadow">
+                        💍 सर्टिफाइड राशि रत्न
+                    </a>
+                    <a id="aff-puja" href="#" target="_blank" class="bg-white text-gray-900 p-3 rounded-lg text-center font-semibold text-sm hover:bg-amber-50 shadow">
+                        🪔 हवन व पूजा सामग्री
+                    </a>
+                </div>
+            </div>
+
+            <!-- CashKaro Deals बॉक्स -->
+            <div class="bg-white border-2 border-dashed border-yellow-400 p-6 rounded-2xl text-center shadow-md">
+                <h4 id="aff-cashkaro-title" class="text-lg font-bold text-gray-900">🛍️ ऑनलाइन शॉपिंग पर बचाएं हज़ारों रुपये!</h4>
+                <p id="aff-cashkaro-desc" class="text-gray-600 text-sm mt-1">Amazon, Flipkart, Myntra व 1000+ साइट्स से शॉपिंग पर पाएं फ्लैट कैशबैक।</p>
+                <a id="aff-cashkaro" href="#" target="_blank" class="inline-block mt-4 bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-6 py-2.5 rounded-full font-bold shadow transition">
+                    👉 CashKaro पर अकाउंट बनाएं व कैशबैक पाएं
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- फ़ुटर -->
+    <footer class="bg-gray-100 border-t py-4 text-center text-xs text-gray-500 mt-8">
+        © 2026 वैदिक कुण्डली जनरेटर • Powered by Saraswat Media
+    </footer>
+
+    <!-- आवश्यक जावास्क्रिप्ट फाइल्स -->
+    <script src="config.js"></script>
+    <script src="translations.js"></script>
+    <script src="astro-engine.js"></script>
+    <script src="chart-renderer.js"></script>
+    
+    <script>
+        let currentLang = CONFIG.defaultLang;
+        let globalChartData = null;
+
+        // लिंक्स इनिशियलाइज़ करें
+        document.getElementById('top-cashkaro-link').href = CONFIG.affiliates.cashkaroUrl;
+        document.getElementById('aff-cashkaro').href = CONFIG.affiliates.cashkaroUrl;
+        document.getElementById('aff-rudraksha').href = CONFIG.affiliates.rudrakshaUrl;
+        document.getElementById('aff-gemstones').href = CONFIG.affiliates.gemstonesUrl;
+        document.getElementById('aff-puja').href = CONFIG.affiliates.pujaItemsUrl;
+
+        // भाषा बदलने का लॉजिक
+        const langBtn = document.getElementById('lang-toggle-btn');
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'hi' ? 'en' : 'hi';
+            langBtn.textContent = currentLang === 'hi' ? 'English' : 'हिंदी';
+            applyTranslations();
+            if (globalChartData) {
+                renderAllCharts();
+            }
+        });
+
+        function applyTranslations() {
+            const t = TRANSLATIONS[currentLang];
+            document.getElementById('site-title').textContent = t.title;
+            document.getElementById('form-heading').textContent = t.form_heading;
+            document.getElementById('form-sub').textContent = t.subtitle;
+            document.getElementById('lbl-name').textContent = t.form_name;
+            document.getElementById('lbl-gender').textContent = t.form_gender;
+            document.getElementById('opt-male').textContent = t.form_male;
+            document.getElementById('opt-female').textContent = t.form_female;
+            document.getElementById('lbl-dob').textContent = t.form_dob;
+            document.getElementById('lbl-tob').textContent = t.form_tob;
+            document.getElementById('lbl-city').textContent = t.form_city;
+            document.getElementById('btn-submit').textContent = t.btn_generate;
+            document.getElementById('tab-btn-d1').textContent = t.tab_d1;
+            document.getElementById('tab-btn-d9').textContent = t.tab_d9;
+            document.getElementById('tab-btn-dasha').textContent = t.tab_dasha;
+            document.getElementById('tab-btn-dosha').textContent = t.tab_dosha;
+            document.getElementById('download-pdf-btn').textContent = t.btn_pdf;
+            document.getElementById('manglik-header').textContent = t.manglik_title;
+            document.getElementById('sadesati-header').textContent = t.sadesati_title;
+            document.getElementById('aff-box-title').textContent = t.amazon_box_title;
+            document.getElementById('aff-box-desc').textContent = t.amazon_box_desc;
+            document.getElementById('aff-rudraksha').textContent = t.btn_rudraksha;
+            document.getElementById('aff-gemstones').textContent = t.btn_gemstones;
+            document.getElementById('aff-puja').textContent = t.btn_puja;
+            document.getElementById('aff-cashkaro-title').textContent = t.cashkaro_title;
+            document.getElementById('aff-cashkaro-desc').textContent = t.cashkaro_desc;
+            document.getElementById('aff-cashkaro').textContent = t.cashkaro_btn;
+        }
+
+        // टैब स्विचिंग लॉजिक
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => {
+                    b.classList.remove('text-amber-700', 'border-b-2', 'border-amber-700');
+                    b.classList.add('text-gray-500');
+                });
+                tabContents.forEach(c => c.classList.add('hidden'));
+
+                btn.classList.add('text-amber-700', 'border-b-2', 'border-amber-700');
+                btn.classList.remove('text-gray-500');
+                document.getElementById(btn.getAttribute('data-target')).classList.remove('hidden');
+            });
+        });
+
+        // फॉर्म सबमिशन
+        document.getElementById('kundali-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('user-name').value;
+            const dob = document.getElementById('user-dob').value;
+            const tob = document.getElementById('user-tob').value;
+            const city = document.getElementById('user-city').value;
+
+            const engine = new VedicAstrologyEngine(dob, tob);
+            globalChartData = engine.calculateChart();
+
+            document.getElementById('res-user-name').textContent = name;
+            document.getElementById('res-birth-info').textContent = `${dob} | ${tob} | ${city}`;
+            
+            renderAllCharts();
+
+            document.getElementById('results-section').classList.remove('hidden');
+            document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function renderAllCharts() {
+            const t = TRANSLATIONS[currentLang];
+            // SVG रेंडर करें
+            document.getElementById('d1-chart-container').innerHTML = renderNorthIndianChart(globalChartData.d1, currentLang);
+            document.getElementById('d9-chart-container').innerHTML = renderNorthIndianChart(globalChartData.d9, currentLang);
+
+            // दोष स्थिति
+            document.getElementById('manglik-status').textContent = globalChartData.dosha.isManglik ? t.manglik_present : t.manglik_absent;
+            document.getElementById('sadesati-status').textContent = globalChartData.dosha.isSadeSati ? t.sadesati_active : t.sadesati_inactive;
+
+            // दशा स्थिति
+            const dasha = globalChartData.dasha;
+            const lordName = currentLang === 'hi' ? dasha.startingLord.nameHi : dasha.startingLord.planet;
+            let dashaHtml = `<p class="font-bold text-gray-800">${t.dasha_current} <span class="text-amber-700 text-lg">${lordName} (${dasha.startingLord.years} वर्ष)</span></p>`;
+            dashaHtml += `<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">`;
+            dasha.cycle.forEach(c => {
+                const pName = currentLang === 'hi' ? c.nameHi : c.planet;
+                dashaHtml += `<div class="p-2 border rounded bg-white text-xs font-semibold">${pName}: ${c.years} वर्ष</div>`;
+            });
+            dashaHtml += `</div>`;
+            document.getElementById('dasha-content').innerHTML = dashaHtml;
+        }
+
+        // PDF डाउनलोड
+        document.getElementById('download-pdf-btn').addEventListener('click', () => {
+            const element = document.getElementById('pdf-printable-area');
+            const opt = {
+                margin: 8,
+                filename: 'Free_Kundali_Report.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        });
+    </script>
+</body>
+</html>
