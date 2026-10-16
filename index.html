@@ -5,145 +5,153 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>वैदिक कुण्डली - Free Kundali Generator</title>
 
-    <!-- Open Graph / WhatsApp / Facebook Preview Tags -->
+    <!-- Open Graph Preview Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://saraswat-media.github.io/Free-kundali/">
-    <meta property="og:title" content="🕉️ वैदिक जन्म कुण्डली - मुफ़्त ऑनलाइन पत्रिका">
-    <meta property="og:description" content="सटीक वैदिक गणना, लग्न व नवमांश (D9) चक्र, विंशोत्तरी दशा, मांगलिक दोष और साढ़े साती विश्लेषण। तुरंत मुफ़्त PDF डाउनलोड करें।">
+    <meta property="og:title" content="🕉️ वैदिक जन्म कुण्डली - 20 पेज सम्पूर्ण फलित पत्रिका">
+    <meta property="og:description" content="सटीक जन्म लग्न, नवमांश, चंद्र कुंडली, 12 भाव फल, विंशोत्तरी दशा व दोष विश्लेषण। तुरंत मुफ़्त PDF डाउनलोड करें।">
     <meta property="og:image" content="https://saraswat-media.github.io/Free-kundali/og-image.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
 
-    <!-- Twitter Card Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🕉️ वैदिक जन्म कुण्डली - मुफ़्त ऑनलाइन पत्रिका">
-    <meta name="twitter:description" content="सटीक वैदिक ज्योतिष गणना, नवमांश और विंशोत्तरी दशा फल।">
-    <meta name="twitter:image" content="https://saraswat-media.github.io/Free-kundali/og-image.png">
-
-    <!-- CSS & Libraries -->
+    <!-- Tailwind CSS & html2pdf -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        .page-break { page-break-after: always; break-after: page; }
+        .pdf-page { width: 100%; min-height: 1080px; padding: 40px; box-sizing: border-box; background: white; margin-bottom: 20px; border: 1px solid #e5e7eb; }
+    </style>
 </head>
 <body class="bg-amber-50/30 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
 
-    <!-- हेडर -->
+    <!-- Header -->
     <header class="bg-amber-700 text-white shadow-md sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
             <h1 class="text-xl font-bold flex items-center gap-2">
-                🕉️ <span id="site-title">वैदिक जन्म कुण्डली</span>
+                🕉️ <span>वैदिक जन्म कुण्डली</span>
             </h1>
-            
             <div class="flex items-center gap-3">
                 <a id="top-cashkaro-link" href="#" target="_blank" class="hidden sm:inline-block bg-yellow-400 hover:bg-yellow-300 text-gray-900 px-3 py-1 rounded-full text-xs font-bold transition">
                     💰 CashKaro कैशबैक
                 </a>
-                <button id="lang-toggle-btn" class="border border-white/70 px-3 py-1 rounded text-sm hover:bg-amber-800 transition">
-                    English
-                </button>
+                <span class="bg-amber-900/60 px-3 py-1 rounded text-xs">20 Page Detailed Report</span>
             </div>
         </div>
     </header>
 
-    <!-- मुख्य बॉडी -->
+    <!-- Main Form -->
     <main class="max-w-4xl mx-auto p-4 sm:p-6 w-full flex-grow">
-        <!-- कुण्डली इनपुट फॉर्म -->
         <div class="bg-white p-6 rounded-2xl shadow-lg border border-amber-200 mb-8">
-            <h2 id="form-heading" class="text-2xl font-bold text-amber-900 text-center mb-1">मुफ़्त जन्म कुण्डली बनाएं</h2>
-            <p id="form-sub" class="text-gray-500 text-center text-sm mb-6">सटीक वैदिक ज्योतिष गणना, दोष विश्लेषण, नवमांश और विंशोत्तरी दशा</p>
+            <h2 class="text-2xl font-bold text-amber-900 text-center mb-1">सम्पूर्ण वैदिक जन्म पत्रिका बनाएं</h2>
+            <p class="text-gray-500 text-center text-sm mb-6">लग्न, नवमांश, चंद्र चक्र, 12 भाव फल, महादशा, दोष व 20 पेज PDF रिपोर्ट</p>
 
             <form id="kundali-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label id="lbl-name" class="block text-sm font-semibold mb-1">पूरा नाम</label>
-                    <input type="text" id="user-name" required placeholder="उदा. रमेश कुमार" class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                    <label class="block text-sm font-semibold mb-1">पूरा नाम</label>
+                    <input type="text" id="user-name" required placeholder="उदा. प्रणव सारस्वत" class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                 </div>
                 <div>
-                    <label id="lbl-gender" class="block text-sm font-semibold mb-1">लिंग</label>
+                    <label class="block text-sm font-semibold mb-1">लिंग</label>
                     <select id="user-gender" class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
-                        <option value="male" id="opt-male">पुरुष</option>
-                        <option value="female" id="opt-female">महिला</option>
+                        <option value="male">पुरुष</option>
+                        <option value="female">महिला</option>
                     </select>
                 </div>
                 <div>
-                    <label id="lbl-dob" class="block text-sm font-semibold mb-1">जन्म तिथि</label>
+                    <label class="block text-sm font-semibold mb-1">जन्म तिथि</label>
                     <input type="date" id="user-dob" required class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                 </div>
                 <div>
-                    <label id="lbl-tob" class="block text-sm font-semibold mb-1">जन्म समय</label>
+                    <label class="block text-sm font-semibold mb-1">जन्म समय</label>
                     <input type="time" id="user-tob" required class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                 </div>
                 <div class="sm:col-span-2">
-                    <label id="lbl-city" class="block text-sm font-semibold mb-1">जन्म स्थान (शहर)</label>
+                    <label class="block text-sm font-semibold mb-1">जन्म स्थान (शहर)</label>
                     <input type="text" id="user-city" required placeholder="उदा. नोखा, बीकानेर, जयपुर" class="w-full border border-gray-300 p-2.5 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                 </div>
                 <div class="sm:col-span-2 mt-2">
-                    <button type="submit" id="btn-submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 rounded-lg shadow transition text-lg">
-                        ✨ फ्री कुण्डली जनरेट करें
+                    <button type="submit" id="btn-submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-3.5 rounded-lg shadow transition text-lg flex items-center justify-center gap-2">
+                        ✨ विस्तृत कुण्डली व 20 पेज PDF जनरेट करें
                     </button>
                 </div>
             </form>
         </div>
 
-        <!-- परिणाम सेक्शन -->
+        <!-- On-Screen Result Dashboard -->
         <div id="results-section" class="hidden space-y-6">
             
-            <div id="pdf-printable-area" class="bg-white p-6 rounded-2xl shadow-lg border border-amber-200">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-4 mb-4 gap-2">
+            <!-- Quick Summary Bar -->
+            <div class="bg-amber-100/70 border border-amber-300 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                    <h3 id="res-user-name" class="text-2xl font-bold text-gray-900"></h3>
+                    <p id="res-birth-info" class="text-sm text-gray-600"></p>
+                </div>
+                <button id="download-pdf-btn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg transition transform active:scale-95">
+                    📥 सम्पूर्ण 20 पेज PDF डाउनलोड करें
+                </button>
+            </div>
+
+            <!-- On-Screen Tabs -->
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-amber-200">
+                <div class="flex border-b border-gray-200 mb-6 overflow-x-auto gap-2">
+                    <button class="tab-btn px-4 py-2 font-bold text-amber-700 border-b-2 border-amber-700 outline-none" data-target="view-panchang">अवकहड़ा व पंचांग</button>
+                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="view-charts">कुण्डली चक्र (D1, D9, चन्द्र)</button>
+                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="view-bhav">12 भाव फलित</button>
+                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="view-planets">9 ग्रह फलित</button>
+                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="view-dasha">विंशोत्तरी महादशा</button>
+                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="view-dosha">दोष एवं शांति</button>
+                </div>
+
+                <!-- Tab 1: Panchang & Avakahada -->
+                <div id="view-panchang" class="tab-content block">
+                    <h4 class="font-bold text-lg text-amber-900 mb-3">अवकहड़ा चक्र एवं जन्म विवरण</h4>
+                    <div id="avakahada-table-container" class="overflow-x-auto"></div>
+                </div>
+
+                <!-- Tab 2: Charts -->
+                <div id="view-charts" class="tab-content hidden space-y-6">
                     <div>
-                        <h3 id="res-user-name" class="text-2xl font-bold text-gray-900"></h3>
-                        <p id="res-birth-info" class="text-sm text-gray-500"></p>
+                        <h4 class="text-center font-bold text-lg text-amber-900 mb-2">लग्न कुण्डली (D-1 Chart)</h4>
+                        <div id="screen-d1-chart"></div>
                     </div>
-                    <button id="download-pdf-btn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-1 shadow">
-                        📥 PDF डाउनलोड करें
-                    </button>
-                </div>
-
-                <!-- टैब्स (D1, D9, Dasha, Dosha) -->
-                <div class="flex border-b border-gray-200 mb-6 overflow-x-auto">
-                    <button class="tab-btn px-4 py-2 font-bold text-amber-700 border-b-2 border-amber-700 outline-none" data-target="tab-view-d1" id="tab-btn-d1">लग्न (D1)</button>
-                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="tab-view-d9" id="tab-btn-d9">नवमांश (D9)</button>
-                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="tab-view-dasha" id="tab-btn-dasha">विंशोत्तरी दशा</button>
-                    <button class="tab-btn px-4 py-2 font-semibold text-gray-500 hover:text-amber-700 outline-none" data-target="tab-view-dosha" id="tab-btn-dosha">दोष व विश्लेषण</button>
-                </div>
-
-                <!-- टैब 1: लग्न कुण्डली -->
-                <div id="tab-view-d1" class="tab-content block">
-                    <h4 class="text-center font-bold text-lg text-amber-900 mb-3">लग्न कुण्डली (D-1 Chart)</h4>
-                    <div id="d1-chart-container"></div>
-                </div>
-
-                <!-- टैब 2: नवमांश कुण्डली -->
-                <div id="tab-view-d9" class="tab-content hidden">
-                    <h4 class="text-center font-bold text-lg text-amber-900 mb-3">नवमांश कुण्डली (D-9 Chart)</h4>
-                    <div id="d9-chart-container"></div>
-                </div>
-
-                <!-- टैब 3: विंशोत्तरी दशा -->
-                <div id="tab-view-dasha" class="tab-content hidden">
-                    <h4 class="text-center font-bold text-lg text-amber-900 mb-3">विंशोत्तरी दशा विवरण</h4>
-                    <div id="dasha-content" class="space-y-3 p-4 bg-amber-50/50 rounded-xl"></div>
-                </div>
-
-                <!-- टैब 4: दोष एवं उपाय -->
-                <div id="tab-view-dosha" class="tab-content hidden">
-                    <h4 class="text-center font-bold text-lg text-amber-900 mb-4">दोष एवं ग्रह प्रभाव</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-4 rounded-xl border bg-orange-50 border-orange-200">
-                            <h5 id="manglik-header" class="font-bold text-orange-900">मंगल दोष स्थिति</h5>
-                            <p id="manglik-status" class="text-sm mt-1"></p>
-                        </div>
-                        <div class="p-4 rounded-xl border bg-blue-50 border-blue-200">
-                            <h5 id="sadesati-header" class="font-bold text-blue-900">शनि साढ़े साती स्थिति</h5>
-                            <p id="sadesati-status" class="text-sm mt-1"></p>
-                        </div>
+                    <div>
+                        <h4 class="text-center font-bold text-lg text-amber-900 mb-2">नवमांश कुण्डली (D-9 Chart)</h4>
+                        <div id="screen-d9-chart"></div>
                     </div>
+                    <div>
+                        <h4 class="text-center font-bold text-lg text-amber-900 mb-2">चन्द्र कुण्डली (Moon Chart)</h4>
+                        <div id="screen-chandra-chart"></div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: 12 Bhav -->
+                <div id="view-bhav" class="tab-content hidden space-y-4">
+                    <h4 class="font-bold text-lg text-amber-900 mb-2">बारह भावों का विस्तृत फलित (House Predictions)</h4>
+                    <div id="screen-bhav-list" class="space-y-3"></div>
+                </div>
+
+                <!-- Tab 4: 9 Planets -->
+                <div id="view-planets" class="tab-content hidden space-y-4">
+                    <h4 class="font-bold text-lg text-amber-900 mb-2">नवग्रह स्थिति एवं जीवन प्रभाव</h4>
+                    <div id="screen-planet-list" class="space-y-3"></div>
+                </div>
+
+                <!-- Tab 5: Dasha -->
+                <div id="view-dasha" class="tab-content hidden">
+                    <h4 class="font-bold text-lg text-amber-900 mb-3">120 वर्षीय विंशोत्तरी महादशा समय-सारणी</h4>
+                    <div id="screen-dasha-table"></div>
+                </div>
+
+                <!-- Tab 6: Dosha -->
+                <div id="view-dosha" class="tab-content hidden space-y-4">
+                    <h4 class="font-bold text-lg text-amber-900 mb-3">दोष विश्लेषण एवं वैदिक समाधान</h4>
+                    <div id="screen-dosha-cards" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
                 </div>
             </div>
 
-            <!-- Amazon Affiliate उपाय बॉक्स -->
+            <!-- Amazon Affiliate Box -->
             <div class="bg-gradient-to-r from-amber-600 to-amber-700 text-white p-6 rounded-2xl shadow-lg">
-                <h4 id="aff-box-title" class="text-lg font-bold mb-2">💎 ग्रह शांति, पूजा एवं रत्न उपाय</h4>
-                <p id="aff-box-desc" class="text-sm text-amber-100 mb-4">अपनी कुंडली के अनुसार प्रमाणित रत्न, मूल रुद्राक्ष और पूजा सामग्री Amazon से प्राप्त करें:</p>
+                <h4 class="text-lg font-bold mb-2">💎 ग्रह शांति, पूजा एवं रत्न उपाय</h4>
+                <p class="text-sm text-amber-100 mb-4">अपनी कुंडली के अनुसार प्रमाणित रत्न, मूल रुद्राक्ष और पूजा सामग्री Amazon से प्राप्त करें:</p>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <a id="aff-rudraksha" href="#" target="_blank" class="bg-white text-gray-900 p-3 rounded-lg text-center font-semibold text-sm hover:bg-amber-50 shadow">
                         📿 प्राकृतिक रुद्राक्ष
@@ -157,10 +165,10 @@
                 </div>
             </div>
 
-            <!-- CashKaro Deals बॉक्स -->
+            <!-- Cashkaro Box -->
             <div class="bg-white border-2 border-dashed border-yellow-400 p-6 rounded-2xl text-center shadow-md">
-                <h4 id="aff-cashkaro-title" class="text-lg font-bold text-gray-900">🛍️ ऑनलाइन शॉपिंग पर बचाएं हज़ारों रुपये!</h4>
-                <p id="aff-cashkaro-desc" class="text-gray-600 text-sm mt-1">Amazon, Flipkart, Myntra व 1000+ साइट्स से शॉपिंग पर पाएं फ्लैट कैशबैक।</p>
+                <h4 class="text-lg font-bold text-gray-900">🛍️ ऑनलाइन शॉपिंग पर बचाएं हज़ारों रुपये!</h4>
+                <p class="text-gray-600 text-sm mt-1">Amazon, Flipkart, Myntra व 1000+ साइट्स से शॉपिंग पर पाएं फ्लैट कैशबैक।</p>
                 <a id="aff-cashkaro" href="#" target="_blank" class="inline-block mt-4 bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-6 py-2.5 rounded-full font-bold shadow transition">
                     👉 CashKaro पर अकाउंट बनाएं व कैशबैक पाएं
                 </a>
@@ -169,73 +177,34 @@
         </div>
     </main>
 
-    <!-- फ़ुटर -->
+    <!-- Hidden Dedicated Printable Container for Full 20-Page PDF -->
+    <div id="full-pdf-export-container" class="hidden"></div>
+
+    <!-- Footer -->
     <footer class="bg-gray-100 border-t py-4 text-center text-xs text-gray-500 mt-8">
-        © 2026 वैदिक कुण्डली जनरेटर • Powered by Saraswat Media
+        © 2026 वैदिक कुण्डली जनरेटर • Powered by Saraswat Media @ Admin : Pranav Saraswat
     </footer>
 
-    <!-- आवश्यक जावास्क्रिप्ट फाइल्स -->
+    <!-- Scripts -->
     <script src="config.js"></script>
     <script src="translations.js"></script>
     <script src="astro-engine.js"></script>
     <script src="chart-renderer.js"></script>
     
     <script>
-        let currentLang = CONFIG.defaultLang;
         let globalChartData = null;
+        let globalUserInput = {};
 
-        // लिंक्स इनिशियलाइज़ करें
+        // Affiliate links
         document.getElementById('top-cashkaro-link').href = CONFIG.affiliates.cashkaroUrl;
         document.getElementById('aff-cashkaro').href = CONFIG.affiliates.cashkaroUrl;
         document.getElementById('aff-rudraksha').href = CONFIG.affiliates.rudrakshaUrl;
         document.getElementById('aff-gemstones').href = CONFIG.affiliates.gemstonesUrl;
         document.getElementById('aff-puja').href = CONFIG.affiliates.pujaItemsUrl;
 
-        // भाषा बदलने का लॉजिक
-        const langBtn = document.getElementById('lang-toggle-btn');
-        langBtn.addEventListener('click', () => {
-            currentLang = currentLang === 'hi' ? 'en' : 'hi';
-            langBtn.textContent = currentLang === 'hi' ? 'English' : 'हिंदी';
-            applyTranslations();
-            if (globalChartData) {
-                renderAllCharts();
-            }
-        });
-
-        function applyTranslations() {
-            const t = TRANSLATIONS[currentLang];
-            document.getElementById('site-title').textContent = t.title;
-            document.getElementById('form-heading').textContent = t.form_heading;
-            document.getElementById('form-sub').textContent = t.subtitle;
-            document.getElementById('lbl-name').textContent = t.form_name;
-            document.getElementById('lbl-gender').textContent = t.form_gender;
-            document.getElementById('opt-male').textContent = t.form_male;
-            document.getElementById('opt-female').textContent = t.form_female;
-            document.getElementById('lbl-dob').textContent = t.form_dob;
-            document.getElementById('lbl-tob').textContent = t.form_tob;
-            document.getElementById('lbl-city').textContent = t.form_city;
-            document.getElementById('btn-submit').textContent = t.btn_generate;
-            document.getElementById('tab-btn-d1').textContent = t.tab_d1;
-            document.getElementById('tab-btn-d9').textContent = t.tab_d9;
-            document.getElementById('tab-btn-dasha').textContent = t.tab_dasha;
-            document.getElementById('tab-btn-dosha').textContent = t.tab_dosha;
-            document.getElementById('download-pdf-btn').textContent = t.btn_pdf;
-            document.getElementById('manglik-header').textContent = t.manglik_title;
-            document.getElementById('sadesati-header').textContent = t.sadesati_title;
-            document.getElementById('aff-box-title').textContent = t.amazon_box_title;
-            document.getElementById('aff-box-desc').textContent = t.amazon_box_desc;
-            document.getElementById('aff-rudraksha').textContent = t.btn_rudraksha;
-            document.getElementById('aff-gemstones').textContent = t.btn_gemstones;
-            document.getElementById('aff-puja').textContent = t.btn_puja;
-            document.getElementById('aff-cashkaro-title').textContent = t.cashkaro_title;
-            document.getElementById('aff-cashkaro-desc').textContent = t.cashkaro_desc;
-            document.getElementById('aff-cashkaro').textContent = t.cashkaro_btn;
-        }
-
-        // टैब स्विचिंग लॉजिक
+        // Tabs switcher
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
-
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 tabBtns.forEach(b => {
@@ -250,61 +219,371 @@
             });
         });
 
-        // फॉर्म सबमिशन
+        // Form Submission
         document.getElementById('kundali-form').addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const name = document.getElementById('user-name').value;
-            const dob = document.getElementById('user-dob').value;
-            const tob = document.getElementById('user-tob').value;
-            const city = document.getElementById('user-city').value;
+            globalUserInput = {
+                name: document.getElementById('user-name').value,
+                dob: document.getElementById('user-dob').value,
+                tob: document.getElementById('user-tob').value,
+                city: document.getElementById('user-city').value
+            };
 
-            const engine = new VedicAstrologyEngine(dob, tob);
+            const engine = new VedicAstrologyEngine(globalUserInput.dob, globalUserInput.tob);
             globalChartData = engine.calculateChart();
 
-            document.getElementById('res-user-name').textContent = name;
-            document.getElementById('res-birth-info').textContent = `${dob} | ${tob} | ${city}`;
-            
-            renderAllCharts();
+            document.getElementById('res-user-name').textContent = globalUserInput.name;
+            document.getElementById('res-birth-info').textContent = `${globalUserInput.dob} | ${globalUserInput.tob} | ${globalUserInput.city}`;
+
+            renderScreenDetails();
 
             document.getElementById('results-section').classList.remove('hidden');
             document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
         });
 
-        function renderAllCharts() {
-            const t = TRANSLATIONS[currentLang];
-            // SVG रेंडर करें
-            document.getElementById('d1-chart-container').innerHTML = renderNorthIndianChart(globalChartData.d1, currentLang);
-            document.getElementById('d9-chart-container').innerHTML = renderNorthIndianChart(globalChartData.d9, currentLang);
+        function renderScreenDetails() {
+            const data = globalChartData;
+            const av = data.avakahada;
 
-            // दोष स्थिति
-            document.getElementById('manglik-status').textContent = globalChartData.dosha.isManglik ? t.manglik_present : t.manglik_absent;
-            document.getElementById('sadesati-status').textContent = globalChartData.dosha.isSadeSati ? t.sadesati_active : t.sadesati_inactive;
+            // 1. Avakahada Table
+            let avHtml = `
+            <table class="w-full text-left text-sm border-collapse border border-amber-200">
+                <tr class="bg-amber-100/50"><td class="p-2 border font-bold">जन्म लग्न</td><td class="p-2 border">${av.lagna}</td><td class="p-2 border font-bold">जन्म राशि</td><td class="p-2 border">${av.rashi}</td></tr>
+                <tr><td class="p-2 border font-bold">नक्षत्र</td><td class="p-2 border">${av.nakshatra}</td><td class="p-2 border font-bold">नक्षत्र स्वामी</td><td class="p-2 border">${av.nakLord}</td></tr>
+                <tr class="bg-amber-100/50"><td class="p-2 border font-bold">गण</td><td class="p-2 border">${av.gana}</td><td class="p-2 border font-bold">योनि</td><td class="p-2 border">${av.yoni}</td></tr>
+                <tr><td class="p-2 border font-bold">नाड़ी</td><td class="p-2 border">${av.nadi}</td><td class="p-2 border font-bold">वर्ण / वश्य</td><td class="p-2 border">${av.varna} / ${av.vashya}</td></tr>
+            </table>`;
+            document.getElementById('avakahada-table-container').innerHTML = avHtml;
 
-            // दशा स्थिति
-            const dasha = globalChartData.dasha;
-            const lordName = currentLang === 'hi' ? dasha.startingLord.nameHi : dasha.startingLord.planet;
-            let dashaHtml = `<p class="font-bold text-gray-800">${t.dasha_current} <span class="text-amber-700 text-lg">${lordName} (${dasha.startingLord.years} वर्ष)</span></p>`;
-            dashaHtml += `<div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">`;
-            dasha.cycle.forEach(c => {
-                const pName = currentLang === 'hi' ? c.nameHi : c.planet;
-                dashaHtml += `<div class="p-2 border rounded bg-white text-xs font-semibold">${pName}: ${c.years} वर्ष</div>`;
+            // 2. Charts
+            document.getElementById('screen-d1-chart').innerHTML = renderNorthIndianChart(data.d1, 'hi');
+            document.getElementById('screen-d9-chart').innerHTML = renderNorthIndianChart(data.d9, 'hi');
+            document.getElementById('screen-chandra-chart').innerHTML = renderNorthIndianChart(data.chandra, 'hi');
+
+            // 3. 12 Bhav
+            let bhavHtml = "";
+            data.bhavDetails.forEach(b => {
+                bhavHtml += `
+                <div class="p-4 rounded-xl border border-amber-100 bg-amber-50/40">
+                    <h5 class="font-bold text-amber-900">${b.name} : ${b.topic}</h5>
+                    <p class="text-sm text-gray-700 mt-1">${b.fal}</p>
+                </div>`;
             });
-            dashaHtml += `</div>`;
-            document.getElementById('dasha-content').innerHTML = dashaHtml;
+            document.getElementById('screen-bhav-list').innerHTML = bhavHtml;
+
+            // 4. Planets
+            let pListHtml = "";
+            Object.keys(data.planetFaladesh).forEach(p => {
+                pListHtml += `
+                <div class="p-3.5 rounded-xl border border-gray-200 bg-white">
+                    <h5 class="font-bold text-gray-900">${PLANET_NAMES_HI[p] || p} ग्रह का प्रभाव</h5>
+                    <p class="text-xs text-gray-600 mt-1">${data.planetFaladesh[p]}</p>
+                </div>`;
+            });
+            document.getElementById('screen-planet-list').innerHTML = pListHtml;
+
+            // 5. Dasha Timeline
+            let dashaHtml = `
+            <table class="w-full text-left text-sm border-collapse border border-gray-200">
+                <thead><tr class="bg-amber-700 text-white"><th class="p-2">महादशा स्वामी</th><th class="p-2">अवधि</th><th class="p-2">प्रारम्भ वर्ष</th><th class="p-2">समापन वर्ष</th></tr></thead>
+                <tbody>`;
+            data.dasha.timeline.forEach((d, i) => {
+                dashaHtml += `<tr class="${i%2===0?'bg-white':'bg-amber-50'}"><td class="p-2 border font-semibold">${d.lord} महादशा</td><td class="p-2 border">${d.duration}</td><td class="p-2 border">${d.startYear}</td><td class="p-2 border">${d.endYear}</td></tr>`;
+            });
+            dashaHtml += `</tbody></table>`;
+            document.getElementById('screen-dasha-table').innerHTML = dashaHtml;
+
+            // 6. Dosha Cards
+            let doshaHtml = `
+            <div class="p-4 rounded-xl border ${data.dosha.isManglik ? 'bg-orange-50 border-orange-200 text-orange-900' : 'bg-green-50 border-green-200 text-green-900'}">
+                <h5 class="font-bold">मंगल दोष स्थिति</h5>
+                <p class="text-sm mt-1">${data.dosha.isManglik ? '⚠️ कुंडली में मांगलिक दोष सक्रिय है (मंगल ' + data.dosha.marsHouse + 'वें भाव में)। विवाह से पूर्व कुंभ विवाह या मंगल शांति अनुशंसित है।' : '✅ कुंडली में कोई मांगलिक दोष नहीं है। दांपत्य जीवन सुखद रहेगा।'}</p>
+            </div>
+            <div class="p-4 rounded-xl border ${data.dosha.isSadeSati ? 'bg-blue-50 border-blue-200 text-blue-900' : 'bg-green-50 border-green-200 text-green-900'}">
+                <h5 class="font-bold">शनि साढ़े साती स्थिति</h5>
+                <p class="text-sm mt-1">${data.dosha.isSadeSati ? '⚠️ वर्तमान में शनि साढ़े साती का प्रभाव है। शनिवार को पीपल में जल चढ़ाएं एवं ॐ शं शनैश्चराय नमः का जाप करें।' : '✅ वर्तमान में साढ़े साती का कोई प्रतिकूल प्रभाव नहीं है।'}</p>
+            </div>
+            <div class="p-4 rounded-xl border bg-purple-50 border-purple-200 text-purple-900">
+                <h5 class="font-bold">कालसर्प दोष विश्लेषण</h5>
+                <p class="text-sm mt-1">${data.dosha.isKaalSarp ? '⚠️ कुंडली में आंशिक कालसर्प योग का निर्माण हो रहा है। भगवान शिव को नाग-नागिन का जोड़ा अर्पित करें।' : '✅ कुंडली कालसर्प दोष से पूर्णतः मुक्त है।'}</p>
+            </div>
+            <div class="p-4 rounded-xl border bg-amber-50 border-amber-200 text-amber-900">
+                <h5 class="font-bold">पितृ दोष व सामान्य शांति</h5>
+                <p class="text-sm mt-1">अमावस्या को पितरों के निमित्त अन्न-दान करें व सूर्य को तांबे के लोटे से प्रतिदिन अर्घ्य दें।</p>
+            </div>`;
+            document.getElementById('screen-dosha-cards').innerHTML = doshaHtml;
         }
 
-        // PDF डाउनलोड
+        // ==========================================
+        // 20-PAGE PDF GENERATOR
+        // ==========================================
         document.getElementById('download-pdf-btn').addEventListener('click', () => {
-            const element = document.getElementById('pdf-printable-area');
+            const btn = document.getElementById('download-pdf-btn');
+            btn.innerHTML = "⏳ 20 पेज PDF तैयार हो रही है...";
+            btn.disabled = true;
+
+            const data = globalChartData;
+            const user = globalUserInput;
+            const av = data.avakahada;
+
+            // Generate structured 20 Pages HTML string
+            let pages = [];
+
+            // PAGE 1: COVER
+            pages.push(`
+            <div class="pdf-page flex flex-col justify-between text-center border-4 border-amber-800">
+                <div class="mt-8">
+                    <h1 class="text-4xl font-extrabold text-amber-900">🕉️ श्री वैदिक जन्म पत्रिका 🕉️</h1>
+                    <p class="text-amber-700 font-semibold tracking-wider mt-2">सम्पूर्ण जीवन फलित दर्पण • 20 पेज महा-रिपोर्ट</p>
+                </div>
+                <div class="my-10">
+                    <div class="w-48 h-48 mx-auto border-4 border-amber-700 rounded-full flex items-center justify-center bg-amber-50">
+                        <span class="text-7xl font-bold text-amber-900">ॐ</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mt-6">${user.name}</h2>
+                    <p class="text-gray-600 text-lg mt-1">जन्म: ${user.dob} | समय: ${user.tob}</p>
+                    <p class="text-gray-600 text-lg">स्थान: ${user.city}</p>
+                </div>
+                <div class="border-t border-amber-200 pt-6 mb-4">
+                    <p class="text-xs text-gray-500">प्रकाशक: वैदिक ज्योतिष संस्थान • Powered by Saraswat Media</p>
+                </div>
+            </div>`);
+
+            // PAGE 2: AVAKAHADA & PANCHANG
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-6">पृष्ठ २: अवकहड़ा चक्र एवं जन्म पंचांग</h2>
+                <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+                    <div class="p-3 bg-amber-50 border rounded font-semibold">जातक का नाम: ${user.name}</div>
+                    <div class="p-3 bg-amber-50 border rounded font-semibold">जन्म स्थान: ${user.city}</div>
+                    <div class="p-3 bg-amber-50 border rounded font-semibold">जन्म तिथि: ${user.dob}</div>
+                    <div class="p-3 bg-amber-50 border rounded font-semibold">जन्म समय: ${user.tob}</div>
+                </div>
+                <table class="w-full text-left border-collapse border border-gray-300 text-sm mb-6">
+                    <tr class="bg-amber-100 font-bold"><td class="p-3 border">तत्व / कारक</td><td class="p-3 border">मान</td><td class="p-3 border">तत्व / कारक</td><td class="p-3 border">मान</td></tr>
+                    <tr><td class="p-3 border font-semibold">जन्म लग्न</td><td class="p-3 border">${av.lagna}</td><td class="p-3 border font-semibold">जन्म राशि</td><td class="p-3 border">${av.rashi}</td></tr>
+                    <tr class="bg-gray-50"><td class="p-3 border font-semibold">नक्षत्र</td><td class="p-3 border">${av.nakshatra}</td><td class="p-3 border font-semibold">नक्षत्र स्वामी</td><td class="p-3 border">${av.nakLord}</td></tr>
+                    <tr><td class="p-3 border font-semibold">गण</td><td class="p-3 border">${av.gana}</td><td class="p-3 border font-semibold">योनि</td><td class="p-3 border">${av.yoni}</td></tr>
+                    <tr class="bg-gray-50"><td class="p-3 border font-semibold">नाड़ी</td><td class="p-3 border">${av.nadi}</td><td class="p-3 border font-semibold">वर्ण</td><td class="p-3 border">${av.varna}</td></tr>
+                    <tr><td class="p-3 border font-semibold">वश्य</td><td class="p-3 border">${av.vashya}</td><td class="p-3 border font-semibold">अयनांश</td><td class="p-3 border">लाहिड़ी (24.1°)</td></tr>
+                </table>
+                <p class="text-xs text-gray-600 leading-relaxed">नोट: अवकहड़ा चक्र के आधार पर ही जातक के मूल स्वभाव, विवाह मिलान में नाड़ी-गण दोष एवं नामकरण का निर्धारण किया जाता है।</p>
+            </div>`);
+
+            // PAGE 3: D1 LAGNA CHART
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-4">पृष्ठ ३: जन्म लग्न कुण्डली (D-1 Chart)</h2>
+                <p class="text-xs text-gray-600 mb-4">लग्न कुण्डली सम्पूर्ण जीवन का भौतिक दर्पण है। यह देह, मानसिक स्थिति और प्रारब्ध को निरूपित करती है।</p>
+                <div class="w-full max-w-md mx-auto my-6">${renderNorthIndianChart(data.d1, 'hi')}</div>
+                <div class="p-4 bg-amber-50 rounded-xl border text-sm mt-4">
+                    <p class="font-bold text-amber-900">लग्न विश्लेषण:</p>
+                    <p class="mt-1 text-gray-700">जातक का लग्न <b>${av.lagna}</b> है। इस लग्न के जातक स्वाभिमानी, पुरुषार्थी और कर्तव्यनिष्ठ होते हैं। जीवन में अपनी मेहनत से उन्नति के उच्च शिखरों को स्पर्श करते हैं।</p>
+                </div>
+            </div>`);
+
+            // PAGE 4: D9 NAVAMSHA CHART
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-4">पृष्ठ ४: नवमांश कुण्डली (D-9 Navamsha)</h2>
+                <p class="text-xs text-gray-600 mb-4">नवमांश कुण्डली सूक्ष्म भाग्य, दांपत्य जीवन और 32 वर्ष की आयु के पश्चात भाग्य के उदय का वास्तविक सूचक है।</p>
+                <div class="w-full max-w-md mx-auto my-6">${renderNorthIndianChart(data.d9, 'hi')}</div>
+                <div class="p-4 bg-blue-50 rounded-xl border text-sm mt-4">
+                    <p class="font-bold text-blue-900">नवमांश विश्लेषण:</p>
+                    <p class="mt-1 text-gray-700">नवमांश लग्न की शुभता जातक को आंतरिक आत्मबल और विवाह उपरांत व्यावसायिक व सामाजिक प्रतिष्ठा में अप्रत्याशित वृद्धि दिलाती है।</p>
+                </div>
+            </div>`);
+
+            // PAGE 5: CHANDRA KUNDALI
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-4">पृष्ठ ५: चन्द्र कुण्डली (Moon Chart)</h2>
+                <p class="text-xs text-gray-600 mb-4">मन, भावना और जनसंपर्क के आकलन के लिए चन्द्र लग्न का विचार अनिवार्य है।</p>
+                <div class="w-full max-w-md mx-auto my-6">${renderNorthIndianChart(data.chandra, 'hi')}</div>
+                <div class="p-4 bg-purple-50 rounded-xl border text-sm mt-4">
+                    <p class="font-bold text-purple-900">चन्द्र लग्न फल:</p>
+                    <p class="mt-1 text-gray-700">चन्द्रमा <b>${av.rashi}</b> राशि में स्थित होकर जातक की कल्पनाशक्ति, निर्णय क्षमता और सामाजिक प्रतिष्ठा को सुदृढ़ कर रहा है।</p>
+                </div>
+            </div>`);
+
+            // PAGES 6 to 11: 12 BHAV FALADESH (2 Bhav per page = 6 pages)
+            for (let i = 0; i < 12; i += 2) {
+                const b1 = data.bhavDetails[i];
+                const b2 = data.bhavDetails[i+1];
+                const pageNum = 6 + (i / 2);
+                pages.push(`
+                <div class="pdf-page">
+                    <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-6">पृष्ठ ${pageNum}: भाव फलित - ${b1.name} एवं ${b2.name}</h2>
+                    
+                    <div class="p-5 border border-amber-200 bg-amber-50/40 rounded-xl mb-6">
+                        <h3 class="text-xl font-bold text-amber-900">${b1.name} (${b1.topic})</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed mt-2">${b1.fal}</p>
+                        <p class="text-xs text-gray-500 mt-2"><b>विशेष प्रभाव:</b> इस भाव के स्वामी का शुभ संबंध जीवन में संबंधित सुखों को अनायास ही सुलभ बनाता है।</p>
+                    </div>
+
+                    <div class="p-5 border border-amber-200 bg-amber-50/40 rounded-xl">
+                        <h3 class="text-xl font-bold text-amber-900">${b2.name} (${b2.topic})</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed mt-2">${b2.fal}</p>
+                        <p class="text-xs text-gray-500 mt-2"><b>विशेष प्रभाव:</b> इस भाव पर शुभ दृष्टि जातक को जीवन के इस क्षेत्र में विशिष्ट कीर्ति व स्थिरता प्रदान करती है।</p>
+                    </div>
+                </div>`);
+            }
+
+            // PAGES 12 to 14: 9 PLANETS FALADESH (3 planets per page = 3 pages)
+            const pKeys = Object.keys(data.planetFaladesh);
+            for (let i = 0; i < 9; i += 3) {
+                const pageNum = 12 + (i / 3);
+                let pBlock = "";
+                for (let k = 0; k < 3 && (i + k) < 9; k++) {
+                    const pl = pKeys[i + k];
+                    pBlock += `
+                    <div class="p-4 border rounded-xl mb-4 bg-white shadow-sm">
+                        <h3 class="text-lg font-bold text-gray-900">${PLANET_NAMES_HI[pl] || pl} ग्रह स्थिति एवं फल</h3>
+                        <p class="text-xs text-gray-700 mt-1 leading-relaxed">${data.planetFaladesh[pl]}</p>
+                    </div>`;
+                }
+                pages.push(`
+                <div class="pdf-page">
+                    <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-6">पृष्ठ ${pageNum}: नवग्रह फलित विश्लेषण</h2>
+                    ${pBlock}
+                </div>`);
+            }
+
+            // PAGE 15: VIMSHOTTARI DASHA TIMELINE
+            let dTable = `<table class="w-full text-left text-sm border-collapse border border-gray-300"><thead><tr class="bg-amber-800 text-white"><th class="p-3">महादशा</th><th class="p-3">अवधि</th><th class="p-3">आरम्भ वर्ष</th><th class="p-3">समाप्ति वर्ष</th></tr></thead><tbody>`;
+            data.dasha.timeline.forEach((d, idx) => {
+                dTable += `<tr class="${idx%2===0?'bg-white':'bg-amber-50'}"><td class="p-3 border font-bold">${d.lord} महादशा</td><td class="p-3 border">${d.duration}</td><td class="p-3 border">${d.startYear}</td><td class="p-3 border">${d.endYear}</td></tr>`;
+            });
+            dTable += `</tbody></table>`;
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-4">पृष्ठ १५: विंशोत्तरी महादशा (१२० वर्षीय कालचक्र)</h2>
+                <p class="text-xs text-gray-600 mb-6">विंशोत्तरी दशा से जीवन के उतार-चढ़ाव, अनुकूल समय और संघर्ष काल का सटीक ज्ञान होता है:</p>
+                ${dTable}
+                <div class="p-4 bg-amber-50 rounded-xl border mt-6 text-sm">
+                    <p class="font-bold text-amber-900">वर्तमान जीवन काल फल:</p>
+                    <p class="text-gray-700 mt-1">वर्तमान महादशा स्वामी जातक के जीवन में मुख्य भूमिका निभा रहे हैं। इस ग्रह के वैदिक मंत्रों का नित्य जाप करने से अनुकूल परिणामों में वृद्धि होती है।</p>
+                </div>
+            </div>`);
+
+            // PAGE 16: MANGLIK DOSHA
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-6">पृष्ठ १६: मंगल दोष विस्तृत विश्लेषण एवं शांति</h2>
+                <div class="p-6 border rounded-2xl ${data.dosha.isManglik ? 'bg-orange-50 border-orange-300 text-orange-950' : 'bg-green-50 border-green-300 text-green-950'} mb-6">
+                    <h3 class="text-xl font-bold">${data.dosha.isManglik ? '⚠️ मंगल दोष प्रभाव' : '✅ मंगल दोष मुक्त स्थिति'}</h3>
+                    <p class="mt-2 text-sm leading-relaxed">${data.dosha.isManglik ? 'जातक की जन्म कुंडली के लग्न, चतुर्थ, सप्तम, अष्टम अथवा द्वादश भाव में मंगल की स्थिति होने से मांगलिक दोष बनता है। इसके कारण दांपत्य जीवन में विचार भेद अथवा विलंब की संभावना रहती है।' : 'जातक की कुंडली में मंगल दोष का कोई अनिष्ट प्रभाव नहीं है। वैवाहिक जीवन सौहार्दपूर्ण रहेगा।'}</p>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">वैदिक निवारण एवं उपाय:</h3>
+                <ul class="list-disc pl-5 text-sm space-y-2 text-gray-700">
+                    <li>मंगलवार के दिन हनुमान चालीसा अथवा सुंदरकांड का पाठ करें।</li>
+                    <li>तांबे के पात्र में जल भरकर उसमें कुमकुम मिलाकर सूर्य एवं मंगल को अर्घ्य दें।</li>
+                    <li>विवाह से पूर्व दोनों कुंडलियों का गुण मिलान अनिवार्य रूप से करवाएं।</li>
+                </ul>
+            </div>`);
+
+            // PAGE 17: SHANI SADE SATI
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-6">पृष्ठ १७: शनि साढ़े साती एवं ढैया विश्लेषण</h2>
+                <div class="p-6 border rounded-2xl ${data.dosha.isSadeSati ? 'bg-blue-50 border-blue-300 text-blue-950' : 'bg-green-50 border-green-300 text-green-950'} mb-6">
+                    <h3 class="text-xl font-bold">${data.dosha.isSadeSati ? '⚠️ साढ़े साती सक्रिय' : '✅ साढ़े साती मुक्त काल'}</h3>
+                    <p class="mt-2 text-sm leading-relaxed">${data.dosha.isSadeSati ? 'वर्तमान समय में जातक की जन्म राशि के समीप शनि का गोचर होने से साढ़े साती का प्रभाव है। यह समय धैर्य, कठिन परिश्रम और आत्म-सुधार का है।' : 'वर्तमान में शनि की साढ़े साती अथवा ढैया का कोई प्रतिकूल प्रभाव नहीं है।'}</p>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">शनि शांति के अनुभूत उपाय:</h3>
+                <ul class="list-disc pl-5 text-sm space-y-2 text-gray-700">
+                    <li>प्रति शनिवार संध्याकाल पीपल वृक्ष के नीचे सरसों के तेल का दीपक प्रज्वलित करें।</li>
+                    <li>काले तिल, उड़द की दाल अथवा लोहे का दान किसी निर्धन अथवा भिक्षुक को दें।</li>
+                    <li>"ॐ शं शनैश्चराय नमः" मंत्र का नित्य 108 बार रुद्राक्ष माला पर जाप करें।</li>
+                </ul>
+            </div>`);
+
+            // PAGE 18: KAAL SARP & PITRA DOSHA
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-6">पृष्ठ १८: कालसर्प एवं पितृ दोष शांति</h2>
+                <div class="p-6 border rounded-2xl bg-purple-50 border-purple-200 text-purple-950 mb-6">
+                    <h3 class="text-xl font-bold">कालसर्प एवं पितृ विश्लेषण</h3>
+                    <p class="mt-2 text-sm leading-relaxed">${data.dosha.isKaalSarp ? 'राहु और केतु के मध्य सभी ग्रहों के आ जाने से कालसर्प योग का निर्माण होता है। यह जीवन में अनपेक्षित विलंब उत्पन्न कर सकता है।' : 'जातक की कुंडली कालसर्प दोष के नकारात्मक प्रभावों से सुरक्षित है।'}</p>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 mb-2">सरल गृह शांति उपाय:</h3>
+                <ul class="list-disc pl-5 text-sm space-y-2 text-gray-700">
+                    <li>सोमवार को शिवलिंग पर कच्चा दूध, बेलपत्र और गंगाजल अर्पित करें।</li>
+                    <li>अमावस्या तिथि को पितरों के निमित्त गौमाता को हरा चारा एवं रोटी खिलाएं।</li>
+                    <li>महामृत्युंजय मंत्र का नित्य श्रद्धापूर्वक पाठ करें।</li>
+                </ul>
+            </div>`);
+
+            // PAGE 19: GEMSTONE & REMEDIES
+            pages.push(`
+            <div class="pdf-page">
+                <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-6">पृष्ठ १९: शुभ रत्न, रुद्राक्ष एवं भाग्योदय उपाय</h2>
+                <div class="grid grid-cols-3 gap-4 mb-6 text-center text-sm">
+                    <div class="p-4 border rounded-xl bg-amber-50">
+                        <p class="font-bold text-amber-900">भाग्य रत्न</p>
+                        <p class="text-lg font-bold text-amber-700 mt-1">माणिक्य / पुखराज</p>
+                        <p class="text-xs text-gray-500 mt-1">उंगली: तर्जनी / अनामिका</p>
+                    </div>
+                    <div class="p-4 border rounded-xl bg-amber-50">
+                        <p class="font-bold text-amber-900">जीवन रत्न</p>
+                        <p class="text-lg font-bold text-amber-700 mt-1">मूंगा / पन्ना</p>
+                        <p class="text-xs text-gray-500 mt-1">उंगली: कनिष्ठिका / अनामिका</p>
+                    </div>
+                    <div class="p-4 border rounded-xl bg-amber-50">
+                        <p class="font-bold text-amber-900">शुभ रुद्राक्ष</p>
+                        <p class="text-lg font-bold text-amber-700 mt-1">पंचमुखी / सातमुखी</p>
+                        <p class="text-xs text-gray-500 mt-1">गले में धारण करें</p>
+                    </div>
+                </div>
+                <div class="p-4 bg-orange-50 border border-orange-200 rounded-xl text-sm leading-relaxed text-gray-800">
+                    <p class="font-bold text-orange-900 mb-1">प्रमाणित रत्न एवं रुद्राक्ष प्राप्ति:</p>
+                    <p>हमेशा लैब सर्टिफाइड रत्न एवं प्राकृतिक नेपाली रुद्राक्ष ही धारण करें। अशुद्ध अथवा कांच के रत्न धारण करने से कोई लाभ नहीं होता।</p>
+                </div>
+            </div>`);
+
+            // PAGE 20: SUMMARY & BLESSINGS
+            pages.push(`
+            <div class="pdf-page flex flex-col justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-amber-900 border-b-2 border-amber-700 pb-2 mb-6">पृष्ठ २०: जीवन निष्कर्ष एवं कल्याणकारी आशीर्वचन</h2>
+                    <div class="p-6 bg-amber-50/70 border border-amber-300 rounded-2xl text-sm text-gray-800 leading-relaxed space-y-4">
+                        <p><b>समग्र जीवन फल:</b> जातक ${user.name} की कुंडली में लग्न एवं भाग्य भाव का सुंदर समन्वय है। जीवन के प्रारंभिक वर्षों में संघर्ष के उपरांत मध्य एवं उत्तरार्ध काल अत्यधिक सुख-समृद्धि, मान-सम्मान एवं पारिवारिक संतोष से परिपूर्ण रहेगा।</p>
+                        <p><b>स्वास्थ्य परामर्श:</b> नियमित योग, प्रातःकाल सूर्य नमस्कार एवं सात्विक आहार का सेवन स्वास्थ्य को सदैव उत्तम बनाए रखेगा।</p>
+                        <p><b>शुभ दिन व रंग:</b> रविवार, मंगलवार एवं गुरुवार अति शुभ हैं। केसरिया, पीला एवं हल्का लाल रंग भाग्यवर्धक है।</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-300 pt-6 text-center text-xs text-gray-500">
+                    <p>🕉️ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः • सर्वे भद्राणि पश्यन्तु मा कश्चिद्दुःखभाग्भवेत् 🕉️</p>
+                    <p class="mt-1 font-semibold">वैदिक कुण्डली जनरेटर • https://saraswat-media.github.io/Free-kundali/</p>
+                </div>
+            </div>`);
+
+            // Assemble into Hidden Container
+            const exportContainer = document.getElementById('full-pdf-export-container');
+            exportContainer.innerHTML = pages.join('<div class="page-break"></div>');
+            exportContainer.classList.remove('hidden');
+
+            // Render PDF with html2pdf
             const opt = {
-                margin: 8,
-                filename: 'Free_Kundali_Report.pdf',
+                margin: 0,
+                filename: `${user.name}_Vedic_Kundali_Report.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                html2canvas: { scale: 1.5, useCORS: true, logging: false },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['css', 'legacy'] }
             };
-            html2pdf().set(opt).from(element).save();
+
+            html2pdf().set(opt).from(exportContainer).save().then(() => {
+                exportContainer.classList.add('hidden');
+                exportContainer.innerHTML = "";
+                btn.innerHTML = "📥 सम्पूर्ण 20 पेज PDF डाउनलोड करें";
+                btn.disabled = false;
+            }).catch(err => {
+                alert("PDF बनाने में त्रुटि: " + err.message);
+                btn.innerHTML = "📥 सम्पूर्ण 20 पेज PDF डाउनलोड करें";
+                btn.disabled = false;
+            });
         });
     </script>
 </body>
